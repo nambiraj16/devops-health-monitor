@@ -21,11 +21,17 @@ def load_config(config_path: str = "config/config.json") -> dict:
     with open(config_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def diagnose_disk_usage(used_percent: float, threshold_percent: float = 85.0) -> str:
+    """Enhanced diagnostics: Evaluates disk usage percentage against threshold and returns HEALTHY or WARNING."""
+    if used_percent >= threshold_percent:
+        return "WARNING"
+    return "HEALTHY"
+
 def check_disk_space(path: str = ".", threshold_percent: float = 85.0) -> dict:
     """Checks disk space usage for the current volume."""
     total, used, free = shutil.disk_usage(path)
     used_percent = round((used / total) * 100, 2)
-    status = "HEALTHY" if used_percent < threshold_percent else "WARNING"
+    status = diagnose_disk_usage(used_percent, threshold_percent)
     
     return {
         "metric": "Disk Space",

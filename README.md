@@ -10,8 +10,15 @@ A lightweight, professional DevOps monitoring utility and demonstration project 
 
 ## 📌 Project Overview
 This project serves a dual purpose:
-1. **Practical DevOps Utility:** A modular Python CLI application that inspects system resources (disk space) and verifies microservice health checks based on declarative JSON configurations.
+1. **Practical DevOps Utility:** A modular Python CLI application that inspects system resources with **enhanced diagnostics** (automated threshold evaluation for disk space reporting `HEALTHY` or `WARNING`) and verifies microservice health checks based on declarative JSON configurations.
 2. **Version Control Demonstration:** Demonstrates an enterprise Git workflow including multi-branch branching strategies (`main`, `dev`, `feature/*`), GitHub Pull Requests, annotated semantic release tags (`v1.0.0`), `.gitignore` filtering, and markdown documentation.
+
+### ✨ Key Features
+- **Enhanced Diagnostics:** Automated disk capacity analysis against configurable thresholds with status classifications (`HEALTHY` vs `WARNING`).
+- **Endpoint Verification:** Automated status checks and latency tracking for microservices.
+- **Configurable Thresholds:** Declarative threshold settings in `config/config.json`.
+- **JSON Report Export:** Option to generate timestamped audit reports via `--export`.
+- **Zero Third-Party Dependencies:** Built entirely with the Python standard library.
 
 ---
 

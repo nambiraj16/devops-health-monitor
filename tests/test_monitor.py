@@ -4,7 +4,7 @@ Runs using Python standard library unittest.
 """
 import unittest
 import os
-from app.monitor import load_config, check_disk_space, check_services
+from app.monitor import load_config, check_disk_space, check_services, diagnose_disk_usage
 from app.utils import format_status, get_timestamp
 
 class TestDevOpsMonitor(unittest.TestCase):
@@ -41,6 +41,12 @@ class TestDevOpsMonitor(unittest.TestCase):
         """Test timestamp formatting validity."""
         ts = get_timestamp()
         self.assertTrue(ts.endswith("Z"))
+
+    def test_diagnose_disk_usage(self):
+        """Test enhanced diagnostics for disk usage threshold evaluation."""
+        self.assertEqual(diagnose_disk_usage(50.0, threshold_percent=85.0), "HEALTHY")
+        self.assertEqual(diagnose_disk_usage(85.0, threshold_percent=85.0), "WARNING")
+        self.assertEqual(diagnose_disk_usage(92.5, threshold_percent=85.0), "WARNING")
 
 if __name__ == "__main__":
     unittest.main()
